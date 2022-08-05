@@ -8,8 +8,6 @@
 #   Build GCC FROM SOURCE: https://blog.csdn.net/qq_42189083/article/details/109612289
 #   GCC SOURCE Code: http://ftp.gnu.org/gnu/gcc
 
-export PACKAGE_GCC_DEFAULT_VERSION=12.1.0
-
 help() {
   echo "Usage:"
   echo "  zmicro package install gcc"
@@ -94,8 +92,8 @@ core() {
   
   # only works when is build from source
   local is_build_from_source=false
-  # local version="${PACKAGE_GCC_DEFAULT_VERSION}"
   local version="12.1.0"
+  # local version="12.1.0"
 
   # while [ "$1" != "" ]; do
   #   case $1 in
@@ -117,6 +115,7 @@ core() {
 
 
   if [ "$is_build_from_source" = "true" ]; then
+    log::info "PACKAGE_GCC_DEFAULT_VERSION: $PACKAGE_GCC_DEFAULT_VERSION"
     log::info "Building from source"
     log::info "Version: $version"
     log::info "Installing..."
