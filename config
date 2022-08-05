@@ -1,0 +1,4 @@
+#!/bin/bash
+
+export PACKAGE_GCC_DEFAULT_VERSION=12.1.0
+
