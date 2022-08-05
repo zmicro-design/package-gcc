@@ -23,7 +23,12 @@ build_from_source() {
 
   log::info "[gcc::build_from_source] started ..."
 
-  local build_dir=$(os::tmp_dir)
+   which bzip2 >> /dev/null 2>&1
+   if [ "$?" != "0" ]; then
+     pm install -y bzip2
+   fi
+
+  local build_dir=$(os::tmp)/build/zmicro_package_gcc
   mkdir -p $build_dir
   log::info "[gcc::build_from_source] build_dir: $build_dir"
 
@@ -32,7 +37,13 @@ build_from_source() {
   local filepath=$build_dir/gcc-$version.tar.gz
 
   local src_dir=$build_dir/src
-  local build_dir=$src_dir/build
+  local src_dir_tmp=$build_dir/gcc-$version
+  local src_build_dir=$src_dir/build
+
+  if [ -d "$src_dir" ]; then
+    rm -rf $src_dir
+  fi
+
   # local install_dir=$build_dir/install
   # local build_log=$build_dir/build.log
   # local gcc_dir=$install_dir/gcc-$version
@@ -43,6 +54,9 @@ build_from_source() {
   log::info "[gcc::build_from_source] url: $url"
   wget -c $url -O $filepath
   tar -xzf $filepath -C $build_dir
+
+  mv $src_dir_tmp $src_dir
+  mkdir $src_build_dir
   # rm -rf $filepath
 
   log::info "[gcc::build_from_source] install dependencies ..."
@@ -50,7 +64,7 @@ build_from_source() {
   ./contrib/download_prerequisites
 
   log::info "[gcc::build_from_source] configure ..."
-  cd $build_dir
+  cd $src_build_dir
   ../configure --prefix=/usr/local/gcc --enable-languages=c,c++ --disable-multilib
 
   log::info "[gcc::build_from_source] build ..."
