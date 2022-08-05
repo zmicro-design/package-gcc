@@ -8,6 +8,8 @@
 #   Build GCC FROM SOURCE: https://blog.csdn.net/qq_42189083/article/details/109612289
 #   GCC SOURCE Code: http://ftp.gnu.org/gnu/gcc
 
+export PACKAGE_GCC_DEFAULT_VERSION=12.1.0
+
 help() {
   echo "Usage:"
   echo "  zmicro package install gcc"
