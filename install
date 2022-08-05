@@ -104,8 +104,16 @@ core() {
     shift
   done
 
+  if [ -n "$BUILD_FROM_SOURCE" ]; then
+    is_build_from_source=true
+  fi
 
-  if [ "$is_build_from_source" = true ]; then
+  if [ -n "GCC_VERSION" ]; then
+    version="$GCC_VERSION"
+  fi
+
+
+  if [ "$is_build_from_source" = "true" ]; then
     log::info "Building from source"
     log::info "Version: $version"
     log::info "Installing..."
