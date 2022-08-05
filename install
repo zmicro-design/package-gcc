@@ -92,30 +92,29 @@ core() {
   
   # only works when is build from source
   local is_build_from_source=false
-  local version="12.1.0"
+  local version="$PACKAGE_GCC_DEFAULT_VERSION"
   # local version="12.1.0"
 
-  # while [ "$1" != "" ]; do
-  #   case $1 in
-  #     -h | --help ) help; exit 0 ;;
-  #     -b | --build-from-source ) is_build_from_source=true ;;
-  #     -v | --version ) version=$2; shift ;;
-  #     * ) echo "Error: Unkown parameter: $1"; exit 1 ;;
-  #   esac
-  #   shift
-  # done
+  while [ "$1" != "" ]; do
+    case $1 in
+      -h | --help ) help; exit 0 ;;
+      -b | --build-from-source ) is_build_from_source=true ;;
+      -v | --version ) version=$2; shift ;;
+      * ) echo "Error: Unkown parameter: $1"; exit 1 ;;
+    esac
+    shift
+  done
 
   if [ -n "$BUILD_FROM_SOURCE" ]; then
     is_build_from_source=true
   fi
 
-  if [ -n "GCC_VERSION" ]; then
+  if [ -n "$GCC_VERSION" ]; then
     version="$GCC_VERSION"
   fi
 
 
   if [ "$is_build_from_source" = "true" ]; then
-    log::info "PACKAGE_GCC_DEFAULT_VERSION: $PACKAGE_GCC_DEFAULT_VERSION"
     log::info "Building from source"
     log::info "Version: $version"
     log::info "Installing..."
