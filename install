@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# OS:
+#   RedHat 7.9.2009(Core 3.10.0-1160.45.1.el7.x86_64 x86_64) 
+#   CentOS 7
+#
+# Reference:
+#   Build GCC FROM SOURCE: https://blog.csdn.net/qq_42189083/article/details/109612289
+#   GCC SOURCE Code: http://ftp.gnu.org/gnu/gcc
+
 help() {
   echo "Usage:"
   echo "  zmicro package install gcc"
