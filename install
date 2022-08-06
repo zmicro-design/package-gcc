@@ -77,14 +77,18 @@ build_from_source() {
   log::info "[gcc::build_from_source] backup gcc ..."
   if [ ! -f "/usr/bin/gcc_bak" ]; then
     mv /usr/bin/gcc /usr/bin/gcc_bak
+  else
+    rm -rf /usr/bin/gcc
   fi
   if [ ! -f "/usr/bin/g++_bak" ]; then
     mv /usr/bin/g++ /usr/bin/g++_bak
+  else
+    rm -rf /usr/bin/g++
   fi
 
   log::info "[gcc::build_from_source] link gcc/g++ ..."
-  ln -s /usr/local/gcc/bin/gcc /usr/bin/gcc
-  ln -s /usr/local/gcc/bin/g++ /usr/bin/g++
+  ln -sf /usr/local/gcc/bin/gcc /usr/bin/gcc
+  ln -sf /usr/local/gcc/bin/g++ /usr/bin/g++
 
   # log::info "[gcc::build_from_source] clean ..."
   # rm -rf $build_dir
