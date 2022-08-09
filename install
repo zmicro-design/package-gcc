@@ -139,7 +139,8 @@ core() {
     pm install -y gcc
   fi
 
-  log::info "Installed gcc $(zgvm current) ..."
+  log::info "Installed gcc ..."
+  gcc --version
 }
 
 run() {
