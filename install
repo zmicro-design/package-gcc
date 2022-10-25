@@ -21,6 +21,15 @@ build_from_source() {
     exit 1
   fi
 
+  if [ -n "$HTTP_PROXY" ] || [ -n "$HTTPS_PROXY" ]; then
+    unset HTTP_PROXY
+    unset HTTPS_PROXY
+    unset ALL_PROXY
+    unset http_proxy
+    unset https_proxy
+    unset all_proxy
+  fi
+
   log::info "[gcc::build_from_source] started ..."
 
    which bzip2 >> /dev/null 2>&1
