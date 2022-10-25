@@ -76,10 +76,18 @@ build_from_source() {
   log::info "[gcc::build_from_source] install dependencies ..."
   cd $src_dir
   ./contrib/download_prerequisites
+  if [ "$?" != "0" ]; then
+    log::error "[gcc::build_from_source] failed to install dependencies."
+    return 1
+  fi
 
   log::info "[gcc::build_from_source] configure ..."
   cd $src_build_dir
   ../configure --prefix=/usr/local/gcc --enable-languages=c,c++ --disable-multilib
+  if [ "$?" != "0" ]; then
+    log::error "[gcc::build_from_source] failed to configure."
+    return 1
+  fi
 
   log::info "[gcc::build_from_source] build ..."
   # make -j$(nproc) 
