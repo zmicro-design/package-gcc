@@ -99,7 +99,7 @@ build_from_source() {
   fi
 
   log::info "[gcc::build_from_source] install ..."
-  make install
+  sudo make install
   if [ "$?" != "0" ]; then
     log::error "[gcc::build_from_source] failed to install gcc $version."
     return 1
@@ -107,19 +107,19 @@ build_from_source() {
 
   log::info "[gcc::build_from_source] backup gcc ..."
   if [ ! -f "/usr/bin/gcc_bak" ]; then
-    mv /usr/bin/gcc /usr/bin/gcc_bak
+    sudo mv /usr/bin/gcc /usr/bin/gcc_bak
   else
-    rm -rf /usr/bin/gcc
+    sudo rm -rf /usr/bin/gcc
   fi
   if [ ! -f "/usr/bin/g++_bak" ]; then
-    mv /usr/bin/g++ /usr/bin/g++_bak
+    sudo mv /usr/bin/g++ /usr/bin/g++_bak
   else
-    rm -rf /usr/bin/g++
+    sudo rm -rf /usr/bin/g++
   fi
 
   log::info "[gcc::build_from_source] link gcc/g++ ..."
-  ln -sf /usr/local/gcc/bin/gcc /usr/bin/gcc
-  ln -sf /usr/local/gcc/bin/g++ /usr/bin/g++
+  sudo ln -sf /usr/local/gcc/bin/gcc /usr/bin/gcc
+  sudo ln -sf /usr/local/gcc/bin/g++ /usr/bin/g++
 
   # log::info "[gcc::build_from_source] clean ..."
   # rm -rf $build_dir
